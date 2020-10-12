@@ -1,3 +1,76 @@
 :host {
+  font-family: 'Source Sans Pro', sans-serif;
+  background: #ebeef0;
+  width: 100%;
   display: flex;
+}
+button {
+  font-family: inherit;
+  padding: 12px 25px;
+  border-radius: 3px;
+  color: #fff;
+}
+.container {
+  margin: 20px 50px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.search-container {
+  display: flex;
+  position: relative;
+}
+.search-container:before {
+  font-family:'Font Awesome 5 Pro';
+  color: #999;
+  content: '\F002';
+  position: absolute;
+  top: 12px;
+  left: 5px;
+  transform: scale(-1, 1) 
+}
+.search-input {
+  color: #999;
+  border: 1px solid #999;
+  border-radius: 3px;
+  width: 300px;
+  padding-left: 25px;
+  margin-right: 5px;
+}
+.search-input::placeholder{
+  color: #999;
+}
+
+.search-button {
+  background: #a3c644;
+}
+.add-course-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.add-course-button {
+  background: #39c2d7;
+}
+.fa-plus {
+  margin-right: 10px;
+}
+.courses-container {
+  margin-top: 10px;
+}
+.load-courses-container {
+  box-shadow: 0 1px 14px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background: #fff;
+  padding: 15px 0;
+  margin: 10px 0;
+}
+.load-more-button {
+  font-family: inherit;
+  display: block;
+  margin: 0 auto;
+  background: none;
+  text-transform: uppercase;
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
 }

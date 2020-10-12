@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="text">
+    <div class="header">
+      <div class="title">{{ courseItem.title }}</div>
+      <div class="info">
+        <span class="info-item">
+          <i class="fal fa-clock"></i>{{ duration }}
+        </span>
+        <span class="info-item">
+          <i class="fal fa-calendar-alt"></i>{{ courseItem.creationDate }}
+        </span>
+      </div>
+    </div>
+    <div class="description">{{ courseItem.description }}</div>
+  </div>
+  <div class="buttons">
+    <button class="edit-button"><i class="fas fa-pen"></i> Edit</button>
+    <button class="delete-button" (click)="delete()"><i class="fas fa-trash"></i> Delete</button>
+  </div>
+</div>

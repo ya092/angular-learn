@@ -1,0 +1,10 @@
+:host {
+  font-family: 'Source Sans Pro', sans-serif;
+  height: 60px;
+}
+.container {
+  height: 100%;
+  margin: 0 50px;
+  display: flex;
+  align-items: center;
+}

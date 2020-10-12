@@ -1,4 +1,8 @@
 :host {
   display: flex;
   justify-content: space-between;
+  background: #464547;
+  height: 60px;
+  font-family: 'Oswald', sans-serif;
+  color: #fff;
 }
