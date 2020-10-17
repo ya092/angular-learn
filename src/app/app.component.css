@@ -13,4 +13,6 @@ main {
 
 .container {
   flex: 1;
+  display: flex;
+  margin-bottom: 60px;
 }

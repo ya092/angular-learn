@@ -1,0 +1,59 @@
+:host {
+  font-family: 'Source Sans Pro', sans-serif;
+  box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background: #fff;
+  padding: 15px 0;
+  margin-bottom: 20px;
+  display: block;
+}
+.container {
+  display: flex;
+}
+.text {
+  color: #464547;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-left: 20px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.title  {
+  font-size: 150%;
+  font-weight: 600;
+}
+.info {
+  color: #999;
+  font-size: 80%;
+}
+.info-item {
+  margin-left: 20px;
+}
+.info-item i {
+  margin-right: 5px;
+}
+.description{
+  padding: 10px 0;
+  line-height: 1.7;
+}
+.buttons {
+  margin: auto;
+  padding: 0 20px 0 100px;
+}
+.edit-button,
+.delete-button {
+  font-family: inherit;
+  padding: 5px 15px;
+  border-radius: 3px;
+  color: #fff;
+  background: #39c2d7;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.edit-button i,
+.delete-button i{
+  margin-right: 5px;
+}
