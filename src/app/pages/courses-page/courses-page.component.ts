@@ -41,9 +41,9 @@ export class CoursesPageComponent implements OnInit {
     ];
   }
 
-  loadMoreHandler = () => console.log('clicked load more button');
+  loadMore = () => console.log('clicked load more button');
 
-  searchHandler = () => console.log(this.searchValue);
+  search = () => console.log(this.searchValue);
 
-  onDeleteHandler = (id: number) => console.log(id);
+  delete = (id: number) => console.log(id);
 }

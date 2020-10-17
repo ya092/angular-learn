@@ -6,7 +6,7 @@
       placeholder="Text to search"
       [(ngModel)]="searchValue"
     />
-    <button class="search-button" (click)="searchHandler()">Search</button>
+    <button class="search-button" (click)="search()">Search</button>
   </div>
   <div class="add-course-container">
     <button class="add-course-button"><i class="fas fa-plus"></i> Add course</button>
@@ -15,10 +15,10 @@
     <app-course-item
       *ngFor="let course of courses"
       [courseItem]="course"
-      (onDelete)="onDeleteHandler($event)"
+      (onDelete)="delete($event)"
     ></app-course-item>
   </div>
   <div class="load-courses-container">
-    <button class="load-more-button" (click)="loadMoreHandler()">load more</button>
+    <button class="load-more-button" (click)="loadMore()">load more</button>
   </div>
 </div>
