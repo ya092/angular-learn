@@ -11,9 +11,9 @@ import { CoursesPageModule } from './pages/courses-page/courses-page.module';
 import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
 
 const appRoutes: Routes = [
-  { path: '', component: CoursesPageComponent},
-  { path: '**', component: CoursesPageComponent}
-]
+  { path: '', component: CoursesPageComponent },
+  { path: '**', component: CoursesPageComponent },
+];
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +27,6 @@ const appRoutes: Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
