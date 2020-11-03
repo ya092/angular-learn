@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ICourse } from 'src/app/models/models';
+import { FilterByPipe } from 'src/app/pipes/filterby/filterBy.pipe';
+import { OrderByPipe } from 'src/app/pipes/orderby/orderBy.pipe';
+import { courses } from '_mocks/courses';
 
 @Component({
   selector: 'app-courses-page',
   templateUrl: './courses-page.component.html',
   styleUrls: ['./courses-page.component.css'],
+  providers: [OrderByPipe,  FilterByPipe]
 })
 export class CoursesPageComponent implements OnInit {
   public searchValue: string = '';
@@ -13,37 +17,14 @@ export class CoursesPageComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.courses = [
-      {
-        id: 1,
-        title: 'Video Course 1. Name tag',
-        creationDate: '9 Nov, 2018',
-        duration: 88,
-        description:
-          'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque praesentium minus itaque. Veniam consectetur, ipsa, quod ipsam earum deleniti aliquid labore provident enim, iure cupiditate quia magnam expedita incidunt voluptatum eaque. Quibusdam, doloremque sequi minima minus illum explicabo magnam voluptatibus.',
-      },
-      {
-        id: 2,
-        title: 'Video Course 1. Name tag',
-        creationDate: '9 Nov, 2018',
-        duration: 38,
-        description:
-          'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque praesentium minus itaque. Veniam consectetur, ipsa, quod ipsam earum deleniti aliquid labore provident enim, iure cupiditate quia magnam expedita incidunt voluptatum eaque. Quibusdam, doloremque sequi minima minus illum explicabo magnam voluptatibus.',
-      },
-      {
-        id: 3,
-        title: 'Video Course 1. Name tag',
-        creationDate: '9 Nov, 2018',
-        duration: 120,
-        description:
-          'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque praesentium minus itaque. Veniam consectetur, ipsa, quod ipsam earum deleniti aliquid labore provident enim, iure cupiditate quia magnam expedita incidunt voluptatum eaque. Quibusdam, doloremque sequi minima minus illum explicabo magnam voluptatibus.',
-      },
-    ];
+    this.courses = new OrderByPipe().transform(courses)
   }
 
   loadMore = () => console.log('clicked load more button');
 
-  search = () => console.log(this.searchValue);
+  search = () => {
+    this.courses = new FilterByPipe().transform(courses, this.searchValue)
+  }
 
   delete = (id: number) => console.log(id);
 }
