@@ -2,29 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { ICourse } from 'src/app/models/models';
 import { FilterByPipe } from 'src/app/pipes/filterby/filterBy.pipe';
 import { OrderByPipe } from 'src/app/pipes/orderby/orderBy.pipe';
-import { courses } from '_mocks/courses';
+import { CoursesService } from 'src/app/services/courses/courses.service';
 
 @Component({
   selector: 'app-courses-page',
   templateUrl: './courses-page.component.html',
   styleUrls: ['./courses-page.component.css'],
-  providers: [OrderByPipe,  FilterByPipe]
+  providers: [OrderByPipe, FilterByPipe],
 })
 export class CoursesPageComponent implements OnInit {
   public searchValue: string = '';
   public courses: ICourse[];
 
-  constructor() {}
+  constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
-    this.courses = new OrderByPipe().transform(courses)
+    this.courses = new OrderByPipe().transform(this.coursesService.getCourses());
   }
 
-  loadMore = () => console.log('clicked load more button');
+  loadMore = () => confirm('clicked load more button');
 
   search = () => {
-    this.courses = new FilterByPipe().transform(courses, this.searchValue)
-  }
+    this.courses = new FilterByPipe().transform(this.courses, this.searchValue);
+  };
 
-  delete = (id: number) => console.log(id);
+  delete = (id: number) => {
+    if (confirm('Delete item?')) {
+      this.courses = this.coursesService.deleteCourse(this.courses, id);
+    }
+  };
 }

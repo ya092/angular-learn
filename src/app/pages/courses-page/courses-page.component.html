@@ -12,7 +12,7 @@
     <button class="add-course-button"><i class="fas fa-plus"></i> Add course</button>
   </div>
   <div class="courses-container">
-    <div *ngIf="!courses" style="text-align: center">No data, feel free to add new courses</div>
+    <div *ngIf="!courses.length" style="text-align: center">No data, feel free to add new courses</div>
     <app-course-item
       *ngFor="let course of courses"
       [courseItem]="course"

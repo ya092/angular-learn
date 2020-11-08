@@ -9,6 +9,7 @@ i{
   margin: 0 5px 0 15px;
 }
 button {
+  cursor: pointer;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
