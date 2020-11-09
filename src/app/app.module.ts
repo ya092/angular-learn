@@ -9,10 +9,14 @@ import { ComponentsModule } from './components/components.module';
 import { CoursesPageModule } from './pages/courses-page/courses-page.module';
 
 import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
+import { LoginPageModule } from './pages/login-page/login-page.module';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: CoursesPageComponent },
+  { path: 'login', component: LoginPageComponent },
   { path: '**', component: CoursesPageComponent },
+  
 ];
 
 @NgModule({
@@ -24,6 +28,7 @@ const appRoutes: Routes = [
     FooterModule,
     ComponentsModule,
     CoursesPageModule,
+    LoginPageModule
   ],
   providers: [],
   bootstrap: [AppComponent],
