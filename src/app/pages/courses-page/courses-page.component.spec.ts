@@ -1,6 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { FilterByPipe } from 'src/app/pipes/filterby/filterBy.pipe';
 
 import { CoursesPageComponent } from './courses-page.component';
 
@@ -10,18 +12,16 @@ describe('CoursesPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesPageComponent ],
+      declarations: [CoursesPageComponent, FilterByPipe],
       imports: [FormsModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
-    .compileComponents();
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CoursesPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
   });
 
   it('should create', () => {
@@ -29,24 +29,17 @@ describe('CoursesPageComponent', () => {
   });
 
   it('should log when loadMore called ', () => {
-    const consoleSpy = spyOn(console, 'log');
+    const consoleSpy = spyOn(window, 'confirm');
     component.loadMore();
 
-    expect(consoleSpy).toHaveBeenCalled()    
+    expect(consoleSpy).toHaveBeenCalled();
   });
 
-  it('should log when search called', () => {
-    const consoleSpy = spyOn(console, 'log');
-    component.searchValue = 'search'
-    component.search();
+  it('should call search when search clicked', () => {
+    const spy = spyOn(component, 'search');
+    fixture.debugElement.query(By.css('.search-button')).triggerEventHandler('click', null);
+    fixture.detectChanges();
 
-    expect(consoleSpy).toHaveBeenCalledWith('search')    
-  });
-
-  it('should log when delete called', () => {
-    const consoleSpy = spyOn(console, 'log');
-    component.delete(1);
-
-    expect(consoleSpy).toHaveBeenCalledWith(1)    
+    expect(spy).toHaveBeenCalled();
   });
 });
