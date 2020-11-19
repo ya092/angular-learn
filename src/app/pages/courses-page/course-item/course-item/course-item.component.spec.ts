@@ -1,5 +1,8 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { CourseBorderDirective } from 'src/app/directives/course-border.directive';
+import { DurationPipe } from 'src/app/pipes/duration/duration.pipe';
 
 
 import { CourseItemComponent } from './course-item.component';
@@ -10,7 +13,7 @@ describe('CourseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseItemComponent ]
+      declarations: [ CourseItemComponent, CourseBorderDirective, DurationPipe ],
     })
     .compileComponents();
   }));
@@ -19,6 +22,7 @@ describe('CourseItemComponent', () => {
     fixture = TestBed.createComponent(CourseItemComponent);
     component = fixture.componentInstance;
     component.courseItem = {
+      topRated: false,
       id: 1,
       title: 'Video Course 1. Name tag',
       creationDate: '9 Nov, 2018',
@@ -53,22 +57,5 @@ describe('CourseItemComponent', () => {
       expect(onEmitSpy).toHaveBeenCalledWith(1);
     })
   })
-  
-
-  describe('convertTime', ()=> {
-    it('should convert', () => {
-      const result = component.convertTime(50)
-      expect(result).toBe('50min'); 
-    });
-
-    it('should convert', () => {
-      const result = component.convertTime(60)
-      expect(result).toBe('1h'); 
-    });
-
-    it('should convert', () => {
-      const result = component.convertTime(70)
-      expect(result).toBe('1h 10min'); 
-    });
-  })
+   
 });
