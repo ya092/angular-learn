@@ -11,24 +11,28 @@ import { CoursesPageModule } from './pages/courses-page/courses-page.module';
 import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
 import { LoginPageModule } from './pages/login-page/login-page.module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { AddCoursePageComponent } from './pages/add-course-page/add-course-page.component';
+import { FormsModule } from '@angular/forms';
+
 
 const appRoutes: Routes = [
   { path: '', component: CoursesPageComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'add', component: AddCoursePageComponent },
   { path: '**', component: CoursesPageComponent },
-  
 ];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AddCoursePageComponent, ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
+    FormsModule,
     HeaderModule,
     FooterModule,
     ComponentsModule,
     CoursesPageModule,
-    LoginPageModule
+    LoginPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

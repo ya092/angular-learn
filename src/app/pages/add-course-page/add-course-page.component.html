@@ -1,0 +1,60 @@
+<div class="container">
+  <h2 class="title">New course</h2>
+  <form>
+    <div class="label">
+      <span class="name">Title:</span>
+      <span class="validation">*required</span>
+    </div>
+    <input
+      class="input"
+      type="text"
+      placeholder="Text input"
+      [(ngModel)]="title"
+      [ngModelOptions]="{ standalone: true }"
+    />
+    <div class="label">
+      <span class="name">Decription:</span>
+      <span class="validation">*required</span>
+    </div>
+    <textarea
+      class="input"
+      rows="5"
+      placeholder="Add decsription"
+      [(ngModel)]="description"
+      [ngModelOptions]="{ standalone: true }"
+    ></textarea>
+    <div class="label small">
+      <span class="name">Duration:</span>
+      <span class="validation">*required</span>
+    </div>
+    <div class="duration">
+      <input
+        class="input small"
+        type="number"
+        placeholder="minutes"
+        [(ngModel)]="duration"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <span *ngIf="duration">{{ duration | duration }}</span>
+    </div>
+    <div class="label small">
+      <span class="name">Date:</span>
+      <span class="validation">*required</span>
+    </div>
+    <input
+      class="input small"
+      type="date"
+      [(ngModel)]="date"
+      [ngModelOptions]="{ standalone: true }"
+    />
+    <div class="label medium">
+      <span class="name">Authors:</span>
+      <span class="validation">*required</span>
+    </div>
+    <input class="input medium" type="text" placeholder="Start typing" />
+    <div class="buttons">
+      <button (click)="cancel($event)" class="button cancelButton">Cancel</button>
+      <button (click)="save($event)" class="button saveButton">Save</button>
+    </div>
+  </form>
+</div>
