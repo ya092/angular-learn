@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DurationPipe } from 'src/app/pipes/duration/duration.pipe';
 import { CoursesService } from 'src/app/services/courses/courses.service';
 
@@ -14,26 +14,33 @@ export class AddCoursePageComponent implements OnInit {
   public duration: string = '';
   public date: string = '';
 
-  constructor(private service: CoursesService, private router: Router) {}
+  constructor(private service: CoursesService, private activateRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    const id = this.router.url.replace('/edit/', '');
-    if (id !== '/add') {
-      const { title, description, duration, creationDate } = this.service.getCourseById(
-        this.service.getCourses(),
-        +id
-      );
-      this.title = title;
-      this.description = description;
-      this.duration = duration.toString();
-      this.date = creationDate;
+    if(this.isEdit()){
+      this.fillFields(this.isEdit())
     }
   }
 
   cancel = (e) => {
     e.preventDefault();
   };
+  
   save = (e) => {
     e.preventDefault();
   };
+
+  isEdit = () => this.activateRoute.snapshot.params['id'];
+
+  fillFields = (id: number) => {
+    const { title, description, duration, creationDate } = this.service.getCourseById(
+      this.service.getCourses(),
+      +id
+    );
+    this.title = title;
+    this.description = description;
+    this.duration = duration.toString();
+    this.date = creationDate;
+  }
+  
 }
