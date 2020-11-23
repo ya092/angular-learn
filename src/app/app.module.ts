@@ -19,6 +19,7 @@ const appRoutes: Routes = [
   { path: '', component: CoursesPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'add', component: AddCoursePageComponent },
+  { path: 'edit/:id', component: AddCoursePageComponent },
   { path: '**', component: CoursesPageComponent },
 ];
 
