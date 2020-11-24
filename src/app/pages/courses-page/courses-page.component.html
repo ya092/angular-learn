@@ -9,7 +9,7 @@
     <button class="search-button" (click)="search()">Search</button>
   </div>
   <div class="add-course-container">
-    <button class="add-course-button"><i class="fas fa-plus"></i> Add course</button>
+    <button class="add-course-button" (click)="addCourse()"><i class="fas fa-plus"></i> Add course</button>
   </div>
   <div class="courses-container">
     <div *ngIf="!courses.length" style="text-align: center">No data, feel free to add new courses</div>

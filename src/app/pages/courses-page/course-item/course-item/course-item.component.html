@@ -18,7 +18,7 @@
     <div class="description">{{ courseItem.description }}</div>
   </div>
   <div class="buttons">
-    <button class="edit-button"><i class="fas fa-pen"></i> Edit</button>
+    <button class="edit-button" (click)="editCourse(courseItem.id)"><i class="fas fa-pen"></i> Edit</button>
     <button class="delete-button" (click)="delete()"><i class="fas fa-trash"></i> Delete</button>
   </div>
 </div>

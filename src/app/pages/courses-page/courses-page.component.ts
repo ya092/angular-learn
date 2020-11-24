@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICourse } from 'src/app/models/models';
 import { FilterByPipe } from 'src/app/pipes/filterby/filterBy.pipe';
 import { OrderByPipe } from 'src/app/pipes/orderby/orderBy.pipe';
@@ -14,7 +15,7 @@ export class CoursesPageComponent implements OnInit {
   public searchValue: string = '';
   public courses: ICourse[];
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(private coursesService: CoursesService, private router: Router) {}
 
   ngOnInit() {
     this.courses = new OrderByPipe().transform(this.coursesService.getCourses());
@@ -31,4 +32,7 @@ export class CoursesPageComponent implements OnInit {
       this.courses = this.coursesService.deleteCourse(this.courses, id);
     }
   };
+  addCourse() {
+    this.router.navigate(['./add']);
+  }
 }
