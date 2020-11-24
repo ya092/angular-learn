@@ -1,3 +1,5 @@
-<div class="container">
-  <span>Courses</span>
+<div *ngIf="breadcrumbs" class="container">
+  <a routerLink="{{ '/' + breadcrumbs[0] }}">{{ breadcrumbs[0] | titlecase }}</a
+  >/
+  <a>{{ convertIdToTitle(breadcrumbs[1]) }}</a>
 </div>
