@@ -27,6 +27,6 @@ export class CourseItemComponent implements OnInit {
     this.onDelete.emit(this.courseItem.id);
   }
   editCourse(id: number) {
-    this.router.navigate([`./edit/${id}`]);
+    this.router.navigate([`./courses/${id}`]);
   }
 }

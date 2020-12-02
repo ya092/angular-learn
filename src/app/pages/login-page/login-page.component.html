@@ -4,12 +4,12 @@
     <span class="name">E-mail:</span>
     <span class="validation">*required</span>
   </div>
-  <input class="input" type="email" placeholder="Enter e-mail"/>
+  <input class="input" type="email" placeholder="Enter e-mail" [(ngModel)]="userMail"/>
   <div class="label">
     <span class="name">Password:</span>
     <span class="validation">*required</span>
   </div>
-  <input class="input" type="password" placeholder="Enter password"/>
+  <input class="input" type="password" placeholder="Enter password" [(ngModel)]="userPass"/>
   <div class="footer">
     <a class="forgotLink">Forgot password?</a>
     <button (click)="login()" class="loginButton">Login</button>

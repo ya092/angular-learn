@@ -33,6 +33,6 @@ export class CoursesPageComponent implements OnInit {
     }
   };
   addCourse() {
-    this.router.navigate(['./add']);
+    this.router.navigate(['./courses/new']);
   }
 }

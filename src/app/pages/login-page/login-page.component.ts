@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 
 @Component({
@@ -7,12 +8,14 @@ import { AuthService } from 'src/app/services/authentication/auth.service';
   styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  @Input() public userMail: string;
+  @Input() public userPass: string;
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
   login() {
-    this.authService.login('fakeEmail', 'fakePass');
-    console.log('logged in successfully');
+    this.authService.login(this.userMail, this.userPass);
+    this.router.navigate(['./']);
   }
 }
