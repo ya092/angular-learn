@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { CoursesService } from 'src/app/services/courses/courses.service';
 @Component({
@@ -9,20 +10,29 @@ import { CoursesService } from 'src/app/services/courses/courses.service';
 })
 export class BreadcrumbsComponent implements OnInit {
   public breadcrumbs: string[];
-
-  constructor(private router: Router, private service: CoursesService, private route: ActivatedRoute) {}
+  public title: string;
+  public routeSub: Subscription;
+  public titleSub: Subscription;
+  constructor(private router: Router, private service: CoursesService) {}
 
   ngOnInit() {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((data: NavigationEnd) => {
         this.breadcrumbs = data.urlAfterRedirects.slice(1).split('/');
+        if (!isNaN(+this.breadcrumbs[1])) {
+          this.service
+            .getCourseById(+this.breadcrumbs[1])
+            .subscribe((data) => (this.title = data.name));
+        } else this.title = this.breadcrumbs[1];
       });
   }
-
-  convertIdToTitle(id: string) {
-    if (!isNaN(+id)) {
-      return this.service.getCourseById(this.service.getCourses(), +id).title;
-    } else return id;
+  ngOnDestroy(): void {
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
+    }
+    if (this.titleSub) {
+      this.titleSub.unsubscribe();
+    }
   }
 }

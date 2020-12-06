@@ -1,17 +1,17 @@
 <div
   class="container"
-  [appCourseBorder]="courseItem.creationDate"
-  [ngClass]="{ top: courseItem.topRated }"
+  [appCourseBorder]="courseItem.date"
+  [ngClass]="{ top: courseItem.isTopRated }"
 >
   <div class="text">
     <div class="header">
       <div class="title">
-        {{ courseItem.title | uppercase }}<i *ngIf="courseItem.topRated" class="fas fa-star"></i>
+        {{ courseItem.name | uppercase }}<i *ngIf="courseItem.isTopRated" class="fas fa-star"></i>
       </div>
       <div class="info">
-        <span class="info-item"> <i class="fal fa-clock"></i>{{ courseItem.duration | duration }} </span>
+        <span class="info-item"> <i class="fal fa-clock"></i>{{ courseItem.length | duration }} </span>
         <span class="info-item">
-          <i class="fal fa-calendar-alt"></i>{{ courseItem.creationDate | date: 'd MMM, y' }}
+          <i class="fal fa-calendar-alt"></i>{{ courseItem.date | date: 'd MMM, y' }}
         </span>
       </div>
     </div>

@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ICourse } from 'src/app/models/models';
 import { FilterByPipe } from 'src/app/pipes/filterby/filterBy.pipe';
 import { OrderByPipe } from 'src/app/pipes/orderby/orderBy.pipe';
@@ -12,16 +14,30 @@ import { CoursesService } from 'src/app/services/courses/courses.service';
   providers: [OrderByPipe, FilterByPipe],
 })
 export class CoursesPageComponent implements OnInit {
+  private count: number;
+  private itemsPerPage = 5;
   public searchValue: string = '';
   public courses: ICourse[];
+  public loadSub: Subscription;
+  public deleteSub: Subscription;
 
   constructor(private coursesService: CoursesService, private router: Router) {}
 
   ngOnInit() {
-    this.courses = new OrderByPipe().transform(this.coursesService.getCourses());
+    this.count = this.itemsPerPage
+    this.loadCourses();
   }
 
-  loadMore = () => confirm('clicked load more button');
+  loadCourses = () => {
+    this.loadSub = this.coursesService.getCourses(this.count).subscribe((data) => {
+      this.courses = new OrderByPipe().transform(data);
+    });
+  };
+
+  loadMore = () => {
+    this.count += this.itemsPerPage
+    this.loadCourses()
+  }
 
   search = () => {
     this.courses = new FilterByPipe().transform(this.courses, this.searchValue);
@@ -29,10 +45,20 @@ export class CoursesPageComponent implements OnInit {
 
   delete = (id: number) => {
     if (confirm('Delete item?')) {
-      this.courses = this.coursesService.deleteCourse(this.courses, id);
+      this.deleteSub = this.coursesService.deleteCourse(id).subscribe();
+      this.loadCourses();
     }
   };
   addCourse() {
     this.router.navigate(['./courses/new']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.loadSub) {
+      this.loadSub.unsubscribe();
+    }
+    if (this.deleteSub) {
+      this.deleteSub.unsubscribe();
+    }
   }
 }

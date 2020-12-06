@@ -1,31 +1,30 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICourse } from 'src/app/models/models';
-import { courses } from '_mocks/courses';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CoursesService {
+  constructor(private httpClient: HttpClient) {}
 
-  getCourses() {
-    return courses
+  getCourses(count = 5) {
+    return this.httpClient.get<ICourse[]>(`http://localhost:3004/courses?start=0&count=${count}`,);
   }
 
-  createCourse(courses: ICourse[], course: ICourse) {
-    courses.push(course)
+  createCourse(course: ICourse) {
+    return this.httpClient.post<ICourse>('http://localhost:3004/courses', course);
   }
 
-  getCourseById(courses: ICourse[], id: number) {
-    return courses.find(course => course.id === id)
+  getCourseById(id: number) {
+    return this.httpClient.get<ICourse>(`http://localhost:3004/courses/${id}`);
   }
 
-  updateCourse(courses: ICourse[], id: number, courseNewData: ICourse ) {
-    const index = courses.findIndex((course => course.id === id));
-    courses[index] = courseNewData
+  updateCourse(id: number, course: ICourse) {
+    return this.httpClient.patch<ICourse>(`http://localhost:3004/courses/${id}`, course);
   }
 
-  deleteCourse(courses: ICourse[], id: number) {
-    return courses.filter(item => item.id !== id)
+  deleteCourse(id: number) {
+    return this.httpClient.delete<ICourse>(`http://localhost:3004/courses/${id}`);
   }
-
 }
