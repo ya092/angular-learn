@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SERVER_URL } from 'src/app/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     this.httpClient
-      .post('http://localhost:3004/auth/login', {
+      .post(`${SERVER_URL}auth/login`, {
         login: email,
         password: password,
       })
@@ -38,7 +39,7 @@ export class AuthService {
 
   getUserInfo() {
     this.httpClient
-      .post('http://localhost:3004/auth/userinfo', { token: localStorage.getItem('token') })
+      .post(`${SERVER_URL}auth/userinfo`, { token: localStorage.getItem('token') })
       .subscribe((response) => console.log(response));
   }
 }
