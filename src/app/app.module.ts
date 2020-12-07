@@ -15,6 +15,9 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AddCoursePageComponent } from './pages/add-course-page/add-course-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { AuthGuard } from './auth.guard';
+import { DatePipe } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 
 const appRoutes: Routes = [
   { path: 'courses', component: CoursesPageComponent, canActivate: [AuthGuard] },
@@ -37,7 +40,11 @@ const appRoutes: Routes = [
     CoursesPageModule,
     LoginPageModule,
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, DatePipe, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

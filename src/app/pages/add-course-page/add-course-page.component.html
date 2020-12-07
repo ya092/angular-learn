@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="title">New course</h2>
+  <h2 class="title">{{this.isEdit() ? 'Edit course' : 'New course'}}</h2>
   <form>
     <div class="label">
       <span class="name">Title:</span>
@@ -9,7 +9,7 @@
       class="input"
       type="text"
       placeholder="Text input"
-      [(ngModel)]="title"
+      [(ngModel)]="name"
       [ngModelOptions]="{ standalone: true }"
     />
     <div class="label">
@@ -32,10 +32,10 @@
         class="input small"
         type="number"
         placeholder="minutes"
-        [(ngModel)]="duration"
+        [(ngModel)]="length"
         [ngModelOptions]="{ standalone: true }"
       />
-      <span *ngIf="duration">{{ duration | duration }}</span>
+      <span *ngIf="length">{{ length | duration }}</span>
     </div>
     <div class="label small">
       <span class="name">Date:</span>
