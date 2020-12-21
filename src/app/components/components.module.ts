@@ -9,12 +9,14 @@ import { OrderByPipe } from '../pipes/orderby/orderBy.pipe';
 import { FilterByPipe } from '../pipes/filterby/filterBy.pipe';
 import { DurationPipe } from '../pipes/duration/duration.pipe';
 import { CourseBorderDirective } from '../directives/course-border.directive';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     BreadcrumbsComponent,
     LogoComponent,
     UserLoginComponent,
+    LoaderComponent,
     OrderByPipe,
     FilterByPipe,
     DurationPipe,
@@ -25,6 +27,7 @@ import { CourseBorderDirective } from '../directives/course-border.directive';
     BreadcrumbsComponent,
     LogoComponent,
     UserLoginComponent,
+    LoaderComponent,
     OrderByPipe,
     FilterByPipe,
     DurationPipe,

@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HeaderModule } from './modules/header/header.module';
-import { FooterModule } from './modules/footer/footer.module';
+import { HeaderModule } from './components/header/header.module';
+import { FooterModule } from './components/footer/footer.module';
 import { ComponentsModule } from './components/components.module';
 import { CoursesPageModule } from './pages/courses-page/courses-page.module';
 import { LoginPageModule } from './pages/login-page/login-page.module';
@@ -18,6 +18,13 @@ import { AuthGuard } from './auth.guard';
 import { DatePipe } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './effects/auth.effects';
+import { CoursesEffects } from './effects/courses.effects';
 
 const appRoutes: Routes = [
   { path: 'courses', component: CoursesPageComponent, canActivate: [AuthGuard] },
@@ -32,13 +39,16 @@ const appRoutes: Routes = [
   declarations: [AppComponent, AddCoursePageComponent, ErrorPageComponent],
   imports: [
     RouterModule.forRoot(appRoutes),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([AuthEffects, CoursesEffects]),
     BrowserModule,
     FormsModule,
     HeaderModule,
     FooterModule,
     ComponentsModule,
     CoursesPageModule,
-    LoginPageModule,
+    LoginPageModule, 
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [AuthGuard, DatePipe, {
     provide: HTTP_INTERCEPTORS,
