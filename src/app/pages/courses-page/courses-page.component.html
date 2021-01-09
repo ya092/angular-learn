@@ -1,15 +1,19 @@
 <div class="container">
   <div class="search-container">
     <input
+      #searchInput
       type="text"
       class="search-input"
       placeholder="Text to search"
-      [(ngModel)]="searchValue"
+      [ngModel]="searchValue | async"
+      (keyup)="searchValue.next(searchInput.value)"
     />
-    <button class="search-button" (click)="search()">Search</button>
+    <button class="search-button">Search</button>
   </div>
   <div class="add-course-container">
-    <button class="add-course-button" (click)="addCourse()"><i class="fas fa-plus"></i> Add course</button>
+    <button class="add-course-button" (click)="addCourse()">
+      <i class="fas fa-plus"></i> Add course
+    </button>
   </div>
   <div class="courses-container">
     <div *ngIf="!courses" style="text-align: center">No data, feel free to add new courses</div>

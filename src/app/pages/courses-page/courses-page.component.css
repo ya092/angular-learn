@@ -43,6 +43,7 @@ button {
 
 .search-button {
   background: #a3c644;
+  visibility: hidden;
 }
 .add-course-container {
   display: flex;

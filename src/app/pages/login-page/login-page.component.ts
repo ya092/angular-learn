@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/authentication/auth.service';
+import { Store } from '@ngrx/store';
+import { logIn } from 'src/app/actions/auth.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -10,11 +10,11 @@ import { AuthService } from 'src/app/services/authentication/auth.service';
 export class LoginPageComponent implements OnInit {
   @Input() public userMail: string;
   @Input() public userPass: string;
-  constructor(private authService: AuthService) {}
+  constructor(private store: Store) {}
 
   ngOnInit() {}
 
   login() {
-    this.authService.login(this.userMail, this.userPass);    
+    this.store.dispatch(logIn({ login: this.userMail, password: this.userPass }));
   }
 }

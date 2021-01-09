@@ -8,9 +8,10 @@ import {
 })
 export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
+    if(req)
     req = req.clone({
       setHeaders: {
-        Authorization: localStorage.getItem('token')
+        Authorization: localStorage.getItem('token') || 'token'
       }
     })
     return next.handle(req);
