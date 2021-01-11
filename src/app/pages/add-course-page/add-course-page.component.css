@@ -73,6 +73,9 @@
   width: 76px;
   margin-left: 12px;
 }
+.button:disabled {
+  opacity: .4;
+}
 .cancelButton {
   color: #5B616F;
   background: rgba(18,21,35,0.20);
@@ -80,4 +83,10 @@
 .saveButton {
   color: #ffffff;
 	background: #67A300;
+}
+.error {
+  border: 1px solid red
+}
+.errorMsg {
+  color: red;
 }
