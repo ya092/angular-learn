@@ -1,27 +1,35 @@
 <div class="container">
-  <h2 class="title">{{this.isEdit() ? 'Edit course' : 'New course'}}</h2>
-  <form>
+  <h2 class="title">{{ this.isEdit() ? 'Edit course' : 'New course' }}</h2>
+  <form [formGroup]="form" (submit)="save()">
     <div class="label">
       <span class="name">Title:</span>
+      <span class="errorMsg" *ngIf="title.errors && title.touched">enter 1-50 letters</span>
       <span class="validation">*required</span>
     </div>
     <input
       class="input"
       type="text"
       placeholder="Text input"
-      [(ngModel)]="name"
-      [ngModelOptions]="{ standalone: true }"
+      formControlName="title"
+      [ngClass]="{
+        error: title.status !== 'VALID' && title.touched
+      }"
     />
     <div class="label">
       <span class="name">Decription:</span>
+      <span class="errorMsg" *ngIf="description.errors && description.touched"
+        >enter 1-500 letters</span
+      >
       <span class="validation">*required</span>
     </div>
     <textarea
       class="input"
       rows="5"
       placeholder="Add decsription"
-      [(ngModel)]="description"
-      [ngModelOptions]="{ standalone: true }"
+      formControlName="description"
+      [ngClass]="{
+        error: description.status !== 'VALID' && description.touched
+      }"
     ></textarea>
     <div class="label small">
       <span class="name">Duration:</span>
@@ -32,10 +40,13 @@
         class="input small"
         type="number"
         placeholder="minutes"
-        [(ngModel)]="length"
-        [ngModelOptions]="{ standalone: true }"
+        formControlName="duration"
+        [ngClass]="{
+          error: duration.status !== 'VALID' && duration.touched
+        }"
       />
-      <span *ngIf="length">{{ length | duration }}</span>
+      <span *ngIf="this.form.value.duration">{{ this.form.value.duration | duration }}</span>
+      <span class="errorMsg" *ngIf="duration.errors && duration.touched">requred field</span>
     </div>
     <div class="label small">
       <span class="name">Date:</span>
@@ -44,9 +55,13 @@
     <input
       class="input small"
       type="date"
-      [(ngModel)]="date"
-      [ngModelOptions]="{ standalone: true }"
+      formControlName="date"
+      [ngClass]="{
+        error: date.status !== 'VALID' && date.touched
+      }"
     />
+    <span class="errorMsg" *ngIf="date.errors && date.touched">requred field</span>
+
     <div class="label medium">
       <span class="name">Authors:</span>
       <span class="validation">*required</span>
@@ -54,7 +69,7 @@
     <input class="input medium" type="text" placeholder="Start typing" />
     <div class="buttons">
       <button (click)="cancel($event)" class="button cancelButton">Cancel</button>
-      <button (click)="save($event)" class="button saveButton">Save</button>
+      <button type="submit" class="button saveButton" [disabled]="!isValid()">Save</button>
     </div>
   </form>
 </div>
